@@ -155,4 +155,12 @@ function verificarGanador(){
     escribirVictoria(lapizAcuarela, "green", "Ganaste,", "Felicidades!");
 }
 
+$(document).ready(function() {
+    $('#ahorcado').click(function(e){
+        $(this).focus();
+    });
+    $('#iniciar-juego').click(function(e) {
+        $('#ahorcado').trigger('click');
+    });
+});
 
