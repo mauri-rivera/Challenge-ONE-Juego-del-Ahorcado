@@ -21,6 +21,16 @@ teclaCaracterSeleccionado.addEventListener("keydown", function(event){
     }
 });
 
+teclaCaracterSeleccionado.addEventListener("keyup", function(event){
+    event.preventDefault();
+    
+    var caracterSeleccionado = String.fromCharCode(event.which);   // Variable que obtiene el cáracter de la tecla presionada
+    var caracterValidado = validarCaracter(caracterSeleccionado);  // Variable que valida el carácter de la tecla presionada
+    if(caracterValidado != undefined){
+        verificarTeclaCaracter(palabraEscogida, caracterValidado);
+    }
+});
+
 // Función que permite selecccionar una palabra al azar
 function escogerPalabraSecreta(){  
     return (arregloPalabras[Math.round(Math.random() * (arregloPalabras.length))]);
@@ -155,12 +165,5 @@ function verificarGanador(){
     escribirVictoria(lapizAcuarela, "green", "Ganaste,", "Felicidades!");
 }
 
-$(document).ready(function() {
-    $('#ahorcado').click(function(e){
-        $(this).focus();
-    });
-    $('#iniciar-juego').click(function(e) {
-        $('#ahorcado').trigger('click');
-    });
-});
+
 
