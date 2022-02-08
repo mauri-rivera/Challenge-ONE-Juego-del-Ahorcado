@@ -23,7 +23,7 @@ teclaCaracterSeleccionado.addEventListener("keydown", function(event){
 
 // Función que permite selecccionar una palabra al azar
 function escogerPalabraSecreta(){  
-    return (arregloPalabras[Math.round(Math.random() * (arregloPalabras.length-1))]);
+    return (arregloPalabras[Math.round(Math.random() * (arregloPalabras.length))]);
 }
 
 // Función que valida solo letras mayúsculas al presionar una tecla 
