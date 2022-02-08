@@ -35,7 +35,7 @@ botonIniciarJuego.addEventListener("click", function(event){
 
     dibujarSoporte(lapizAcuarela);
 
-    if(detector.phone() == null || detector.mobile() == null){
+    if(detector.phone() != null || detector.mobile() != null){
         inputMovil.focus();
     }
 });
