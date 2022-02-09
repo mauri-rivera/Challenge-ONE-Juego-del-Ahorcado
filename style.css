@@ -35,6 +35,41 @@
   justify-content: center;
 }
 
-.invisible{
-	display: none;
+.text-input2 {
+  border-radius: 0.5em;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  display: none;
+  padding: 0.5em;
+  width: 1%;
+  height: 50px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.main-rodapie2 {
+  width: 80vw;
+  margin: auto;
+  justify-content: center;
+  display: none;
+}
+
+#dmovil{
+  border-radius: 0.5em;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  padding: 0.5em;
+  width: 1%;
+  height: 50px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.text-input3 {
+  border-radius: 0.5em;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  display: block;
+  padding: 0.5em;
+  width: 1%;
+  height: 50px;
+  margin-left: auto;
+  margin-right: auto;
 }
