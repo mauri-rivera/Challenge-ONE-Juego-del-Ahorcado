@@ -10,7 +10,7 @@
   <body>
     <div style="text-align:center; margin: 50px 0px;">
       <h1 class="titulo">Ahorcado</h1>
-      <button class="btn" id="iniciar-juego">INICIAR JUEGO</button>
+      <button class="btn" id="iniciar-juego" onKeyUp="RevisoFoco()">INICIAR JUEGO</button>
     </div>
     <form id="nuevo-texto" name="nuevoTexto">
       <div style="text-align:center" id="nuevo-texto">
@@ -19,9 +19,10 @@
         <button class="btn" id="nueva-palabra">AGREGAR PALABRA</button> 
       </div>
     </form>
-    <br><br><input id="dmovil" class="invisible"/><br><br>
+    <br><br><br><br><br>
     <div style="text-align:center;">
       <canvas id="ahorcado" height="800px" width="1200px"></canvas>
+      <input id="dmovil" class="invisible" onFocus="GanoFoco()" onBlur="PierdoFoco()"/>
     </div>
     <script type="text/javascript" src="javascript/canvas.js"></script>
     <script type="text/javascript" src="javascript/ahorcado.js"></script>

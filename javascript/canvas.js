@@ -1,17 +1,15 @@
 var botonIniciarJuego = document.querySelector("#iniciar-juego");
-
 var cuadro = document.querySelector("#ahorcado");
-var inputMovil = document.querySelector("#dmovil");
+
 var lapizAcuarela = cuadro.getContext('2d');
 var palabraEscogida;    // Variable que representa la palabra secreta seleccionada al azar para ser descifrada
 var nuevaPartida = 0;   // Variable que proporciona la coordenada X (letra + espacio) entre carácteres incorrectos
 var coordenadasLineas = [];  // Variable que guarda las coordenadas X e Y a partir de los dibujos de líneas para agregar los carácteres correctos de la palabra secreta   
+var HayFoco = true;
 
 // Función que inicia el juego del Ahorcado
 botonIniciarJuego.addEventListener("click", function(event){
     event.preventDefault();
-
-    var detector = new MobileDetect(window.navigator.userAgent);
 
     if(contadorLetrasCorrectas > 0 && coordenadasLineas.length > 0 && arregloCaracteresRepetitivos.length > 0){
         coordenadasLineas.splice(0, coordenadasLineas.length);   
@@ -34,10 +32,6 @@ botonIniciarJuego.addEventListener("click", function(event){
     dibujarLineasPalabra(lapizAcuarela, palabraEscogida);
 
     dibujarSoporte(lapizAcuarela);
-
-    if(detector.phone() != null || detector.mobile() != null){
-        inputMovil.focus();
-    }
 });
 
 // Función encargada de dibujar las líneas de carácteres con los espacios de la palabra seleccionada al azar 
@@ -142,6 +136,19 @@ function ObtenerNuevaLineaEspacio(nuevaLinea, nuevoEspacio, numeroLinea, numeroE
     return { linea: nuevaLinea, espacio: nuevoEspacio }
 }
 
+function GanoFoco(){
+    HayFoco = true;
+ }
+  
+ function PierdoFoco(){
+    HayFoco = false;
+ }
+
+function RevisoFoco(){
+    if(!HayFoco){
+        document.getElementById("primerimput").focus();
+    }
+ }
 
 
 

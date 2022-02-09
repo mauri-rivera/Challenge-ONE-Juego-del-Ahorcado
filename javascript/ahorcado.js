@@ -1,4 +1,6 @@
 var teclaCaracterSeleccionado = document.querySelector("#iniciar-juego");
+var inputMovil = document.querySelector("#dmovil");
+var teclaCaracterSeleccionadoMovil = document.querySelector("#iniciar-juego");
 
 // Variable que guarda una determinada cantidad de palabras para ser elegidas al azar
 var arregloPalabras = ["Javascript", "Oracle", "Alura", "HTML", "CSS", "Canvas"];
@@ -13,13 +15,55 @@ var arregloCaracteresRepetitivos = [];  // Variable que guarda los carácteres n
 // Función que captura el evento cuando una tecla es presionada
 teclaCaracterSeleccionado.addEventListener("keydown", function(event){
     event.preventDefault();
-    
-    var caracterSeleccionado = String.fromCharCode(event.which);   // Variable que obtiene el cáracter de la tecla presionada
-    var caracterValidado = validarCaracter(caracterSeleccionado);  // Variable que valida el carácter de la tecla presionada
-    if(caracterValidado != undefined){
-        verificarTeclaCaracter(palabraEscogida, caracterValidado);
+
+    var detector = new MobileDetect(window.navigator.userAgent);
+
+    if(detector.phone() != null || detector.mobile() != null){
+        if(HayFoco == true){
+            inputMovil.value = String.fromCharCode(event.which);
+            var caracterSeleccionado = inputMovil.value;   // Variable que obtiene el cáracter de la tecla presionada
+            var caracterValidado = validarCaracter(caracterSeleccionado);  // Variable que valida el carácter de la tecla presionada
+            inputMovil.value = "";
+            if(caracterValidado != undefined){
+                verificarTeclaCaracter(palabraEscogida, caracterValidado);
+            }
+        }
     }
-});
+    else{
+        inputMovil.blur();
+        var caracterSeleccionado = String.fromCharCode(event.which);   // Variable que obtiene el cáracter de la tecla presionada
+        var caracterValidado = validarCaracter(caracterSeleccionado);  // Variable que valida el carácter de la tecla presionada
+        if(caracterValidado != undefined){
+            verificarTeclaCaracter(palabraEscogida, caracterValidado);
+        }
+    }
+});      
+
+teclaCaracterSeleccionadoMovil.addEventListener("touchstart", function(event){
+    event.preventDefault();
+
+    var detectorMovil = new MobileDetect(window.navigator.userAgent);
+
+    if(detectorMovil.phone() != null || detectorMovil.mobile() != null){
+        if(HayFoco == true){
+            inputMovil.value = String.fromCharCode(event.which);
+            var caracterSeleccionadoMovil2 = inputMovil.value;   // Variable que obtiene el cáracter de la tecla presionada
+            var caracterValidadoMovil2 = validarCaracter(caracterSeleccionadoMovil2);  // Variable que valida el carácter de la tecla presionada
+            inputMovil.value = "";
+            if(caracterValidadoMovil2 != undefined){
+                verificarTeclaCaracter(palabraEscogida, caracterValidadoMovil2);
+            }
+        }
+    }
+    else{
+        inputMovil.blur();
+        var caracterSeleccionado2 = String.fromCharCode(event.which);   // Variable que obtiene el cáracter de la tecla presionada
+        var caracterValidado2 = validarCaracter(caracterSeleccionado2);  // Variable que valida el carácter de la tecla presionada
+        if(caracterValidado2 != undefined){
+            verificarTeclaCaracter(palabraEscogida, caracterValidado2);
+        }
+    }
+});   
 
 // Función que permite selecccionar una palabra al azar
 function escogerPalabraSecreta(){  
