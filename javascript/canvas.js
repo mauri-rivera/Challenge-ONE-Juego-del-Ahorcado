@@ -16,6 +16,7 @@ botonIniciarJuego.addEventListener("click", function(event){
         nuevoTituloArriba.classList.remove("main-rodapie2");
         nuevoTituloAbajo.classList.remove("main-rodapie2");
         inputMovil.classList.remove("text-input2");
+        inputMovil.classList.add("text-input");
         nuevoTituloArriba.classList.add("main-rodapie");
         nuevoTituloAbajo.classList.add("main-rodapie");
         inputMovil.focus();  
