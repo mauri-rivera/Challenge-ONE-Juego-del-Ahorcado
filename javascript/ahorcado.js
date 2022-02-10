@@ -1,7 +1,8 @@
 var teclaCaracterSeleccionado = document.querySelector("#iniciar-juego");
 var inputMovil = document.querySelector("#dmovil");
-var teclaCaracterSeleccionadoMovil = document.querySelector("#iniciar-juego");
-var nuevoTitulo = document.querySelector("#titulo2");
+var teclaCaracterSeleccionadoMovil = document.querySelector("#nuevo");
+var nuevoTituloArriba = document.querySelector("#titulo2");
+var nuevoTituloAbajo = document.querySelector("#titulo3");
 
 // Variable que guarda una determinada cantidad de palabras para ser elegidas al azar
 var arregloPalabras = ["Javascript", "Oracle", "Alura", "HTML", "CSS", "Canvas"];
@@ -14,32 +15,6 @@ var contadorLetrasIncorrectas = 0;  // Variable que realiza el conteo de los car
 var arregloCaracteresRepetitivos = [];  // Variable que guarda los carácteres no repetitivos de la palabra seleccionada al azar
 
 // Función que captura el evento cuando una tecla es presionada
-teclaCaracterSeleccionadoMovil.addEventListener("click", function(event){
-    event.preventDefault();
-
-    var detector = new MobileDetect(window.navigator.userAgent);
-    
-    if(detector.phone() != null || detector.mobile() != null){        
-        nuevoTitulo.classList.remove("main-rodapie2");
-        inputMovil.classList.remove("text-input2"); 
-        nuevoTitulo.classList.add("main-rodapie");
-        inputMovil.focus();                      
-    }
-});
-
-inputMovil.addEventListener("keydown", function(event){
-    event.preventDefault();
-
-    if(inputMovil.value != ""){
-        var caracterValidadoMovil = convertirMayuscula(inputMovil.value);
-        if(caracterValidadoMovil != undefined){
-            verificarTeclaCaracter(palabraEscogida, caracterValidadoMovil);
-            inputMovil.textContent = "";
-        }
-    }
-});
-
-// Función que captura el evento cuando una tecla es presionada
 teclaCaracterSeleccionado.addEventListener("keydown", function(event){
     event.preventDefault();
 
@@ -50,6 +25,20 @@ teclaCaracterSeleccionado.addEventListener("keydown", function(event){
     }
 });
 
+function prepararLetra(){
+    if(inputMovil.value != ""){
+        setTimeout(ejecutarLetra, 200);
+    }
+}
+
+function ejecutarLetra(){
+    var caracterValidado = validarCaracter(inputMovil.value);  // Variable que valida el carácter de la tecla presionada
+    if(caracterValidado != undefined){
+        inputMovil.value = "";
+        verificarTeclaCaracter(palabraEscogida, caracterValidado);
+    }
+}
+
 // Función que permite selecccionar una palabra al azar
 function escogerPalabraSecreta(){  
     return (arregloPalabras[Math.round(Math.random() * (arregloPalabras.length))]);
@@ -57,9 +46,25 @@ function escogerPalabraSecreta(){
 
 // Función que valida solo letras mayúsculas al presionar una tecla 
 function validarCaracter(keyChar){
-    if(keyChar.match(caracterExpresionRegular) != null){  
-        return keyChar;
+    var resultado;
+
+    if(keyChar.match(caracterValidacionMinuscula) != null){
+        resultado = keyChar.toUpperCase();
+        if(resultado.match(caracterExpresionRegular) != null){
+            return resultado;
+        }
+        else{
+            inputMovil.value = "";
+            return resultado = undefined;
+        }
     }
+    else if(keyChar.match(caracterExpresionRegular) != null){  
+            return keyChar;
+    }
+    else{
+        inputMovil.value = "";
+        return resultado = undefined;
+    } 
 }
 
 // Función que distingue y registra los carácteres que son acertados correctamente e incorrectamente al presionar una tecla 

@@ -73,3 +73,7 @@
   margin-left: auto;
   margin-right: auto;
 }
+
+#nuevo{
+  display: none;
+}
