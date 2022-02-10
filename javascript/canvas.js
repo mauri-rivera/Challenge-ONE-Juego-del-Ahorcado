@@ -13,11 +13,11 @@ botonIniciarJuego.addEventListener("click", function(event){
     var detector = new MobileDetect(window.navigator.userAgent);
     
     if(detector.phone() != null || detector.mobile() != null || detector.tablet() != null || detector.os() != null || detector.userAgent() != null){        
-        nuevoTituloArriba.classList.remove("main-rodapie2");
+        /*nuevoTituloArriba.classList.remove("main-rodapie2");
         nuevoTituloAbajo.classList.remove("main-rodapie2");
         inputMovil.classList.remove("text-input2");
         nuevoTituloArriba.classList.add("main-rodapie");
-        nuevoTituloAbajo.classList.add("main-rodapie");
+        nuevoTituloAbajo.classList.add("main-rodapie");*/
         inputMovil.focus();  
         setInterval(prepararLetra, 200);                 
     }
