@@ -10,17 +10,17 @@ var coordenadasLineas = [];  // Variable que guarda las coordenadas X e Y a part
 botonIniciarJuego.addEventListener("click", function(event){
     event.preventDefault();
 
-    //var detector = new MobileDetect(window.navigator.userAgent);
+    var detector = new MobileDetect(window.navigator.userAgent);
     
-    //if(detector.phone() != null || detector.mobile() != null || detector.tablet() != null || detector.os() != null || detector.userAgent() != null){        
-        /*nuevoTituloArriba.classList.remove("main-rodapie2");
+    if(detector.phone() != null || detector.mobile() != null || detector.tablet() != null || detector.os() != null || detector.userAgent() != null){        
+        nuevoTituloArriba.classList.remove("main-rodapie2");
         nuevoTituloAbajo.classList.remove("main-rodapie2");
         inputMovil.classList.remove("text-input2");
         nuevoTituloArriba.classList.add("main-rodapie");
-        nuevoTituloAbajo.classList.add("main-rodapie");*/
-        //inputMovil.focus();  
+        nuevoTituloAbajo.classList.add("main-rodapie");
+        inputMovil.focus();  
         setInterval(prepararLetra, 200);                 
-    //}
+    }
 
     if(contadorLetrasCorrectas > 0 && coordenadasLineas.length > 0 && arregloCaracteresRepetitivos.length > 0){
         coordenadasLineas.splice(0, coordenadasLineas.length);   
