@@ -57,6 +57,7 @@ function capturarNuevaPalabra(){
 // Función que agrega una nueva palabra al selecto grupo de palabras que son elegidos al azar para el juego del Ahorcado
 function agregarNuevaPalabra(palabraTexto){
     arregloPalabras.push(palabraTexto);
+    nuevaPalabra.value = "";
 }
 
 // Función encargado de mostrar una palabra desde un campo de texto  

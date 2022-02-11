@@ -1,6 +1,5 @@
 var teclaCaracterSeleccionado = document.querySelector("#iniciar-juego");
 var inputMovil = document.querySelector("#dmovil");
-var teclaCaracterSeleccionadoMovil = document.querySelector("#nuevo");
 var nuevoTituloArriba = document.querySelector("#titulo2");
 var nuevoTituloAbajo = document.querySelector("#titulo3");
 
