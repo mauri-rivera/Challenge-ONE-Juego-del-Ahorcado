@@ -41,17 +41,21 @@ function escribirVictoria(ctx, color, mensaje1, mensaje2){
     escribirMensaje(ctx, color, mensaje1, mensaje2);
 }
 
+function escribirErrorLetraRepetida(ctx, color, mensaje1, mensaje2){
+    escribirMensaje(ctx, color, mensaje1, mensaje2);
+}
+
 // Función que dibuja un mensaje
 function escribirMensaje(ctx, color, mensaje1, mensaje2){
     if(mensaje2 == undefined){
         ctx.font = "40px Georgia";
         ctx.fillStyle = color;
-        ctx.fillText(mensaje1, 800, 350);
+        ctx.fillText(mensaje1, 775, 350);
     }
     else{
         ctx.font = "40px Georgia";
         ctx.fillStyle = color;
-        ctx.fillText(mensaje1, 800, 325);
-        ctx.fillText(mensaje2, 775, 360);
-    }  
+        ctx.fillText(mensaje1, 775, 325);
+        ctx.fillText(mensaje2, 750, 360);
+    } 
 }

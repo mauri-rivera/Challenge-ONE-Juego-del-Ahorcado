@@ -1,7 +1,5 @@
 var teclaCaracterSeleccionado = document.querySelector("#iniciar-juego");
 var inputMovil = document.querySelector("#dmovil");
-var nuevoTituloArriba = document.querySelector("#titulo2");
-var nuevoTituloAbajo = document.querySelector("#titulo3");
 
 // Variable que guarda una determinada cantidad de palabras para ser elegidas al azar
 var arregloPalabras = ["Javascript", "Oracle", "Alura", "HTML", "CSS", "Canvas"];
@@ -12,6 +10,7 @@ var caracteresErrados = [];  // Variable que sólo guarda carácteres que no est
 var contadorLetrasCorrectas = 0;  // Variable que realiza el conteo de los carácteres acertados correctamente en relación con la palabra seleccionada al azar
 var contadorLetrasIncorrectas = 0;  // Variable que realiza el conteo de los carácteres acertados incorrectamente en relación con la palabra seleccionada al azar
 var arregloCaracteresRepetitivos = [];  // Variable que guarda los carácteres no repetitivos de la palabra seleccionada al azar
+var letraRepetida = false;
 
 // Función que captura el evento cuando una tecla es presionada
 teclaCaracterSeleccionado.addEventListener("keydown", function(event){
@@ -91,6 +90,7 @@ function verificarTeclaCaracter(palabraObtenida, teclaObtenida){
 
         if(arregloCaracteresRepetitivos.length == 0 && contadorAciertos > 0){
             arregloCaracteresRepetitivos.push(teclaObtenida);
+            borrarMensajeLetraRepetida();
         }
         else if(contadorAciertos > 0){
             var valorRepetitivo = false;   // Variable interruptor para identicar si existe un carácter repetitivo o no existe 
@@ -103,6 +103,8 @@ function verificarTeclaCaracter(palabraObtenida, teclaObtenida){
             if(valorRepetitivo == true){
                 if(contadorAciertos > 1){
                     contadorLetrasCorrectas = contadorLetrasCorrectas - contadorAciertos;
+                    borrarMensajeLetraRepetida();
+                    mostrarMensajeLetraRepetidaCorrecta();
                 }
                 else{
                     contadorLetrasCorrectas--;
@@ -110,54 +112,123 @@ function verificarTeclaCaracter(palabraObtenida, teclaObtenida){
             }
             else {
                 arregloCaracteresRepetitivos.push(teclaObtenida);
+                borrarMensajeLetraRepetida();
             }
         }
         
         if(contadorLetrasCorrectas == resultadoCaracteres.length){
+            nuevaPalabra.classList.remove("text-input3");
+            nuevaPalabra.classList.add("text-input");
+            botonAgregarNuevaPalabra.classList.remove("btn2");
+            botonAgregarNuevaPalabra.classList.add("btn");
+            nuevoTituloArriba.classList.remove("main-rodapie");
+            nuevoTituloArriba.classList.add("main-rodapie2");
             contadorLetrasIncorrectas = 10;
             verificarGanador();
         }
         
-        if(contadorAciertos == 0){
-            contadorLetrasIncorrectas++;
-            if(contadorLetrasIncorrectas <= 9){
-                dibujarHorcaAhorcado(lapizAcuarela, contadorLetrasIncorrectas);
-            }
-                
+        if(contadorAciertos == 0){        
             if(caracteresErrados.length == 0){
                 caracteresErrados.push(teclaObtenida);
                 dibujarCaracterIncorrecto(lapizAcuarela, caracteresErrados, caracteresErrados.length);
+                contadorLetrasIncorrectas++;
+                dibujarHorcaAhorcado(lapizAcuarela, contadorLetrasIncorrectas);
+                borrarMensajeLetraRepetida();
             }
 
             while(k < caracteresErrados.length){
-                if(caracteresErrados[k] == teclaObtenida){
-                    contadorRepetitivo++;
+                if(caracteresErrados[k] == teclaObtenida){ 
+                    if(letraRepetida == true){
+                        borrarMensajeLetraRepetida();
+                        mostrarMensajeLetraRepetidaIncorrecta();
+                        letraRepetida = false;
+                        contadorRepetitivo++;
+                        k++;
+                    }
+                    
+                    if(letraRepetida == false && caracteresErrados.length == 1){
+                        letraRepetida = true;
+                        contadorRepetitivo++;
+                        k++;
+                    }
+                    else if(letraRepetida == false && caracteresErrados.length > 1){
+                        borrarMensajeLetraRepetida();
+                        mostrarMensajeLetraRepetidaIncorrecta();
+                        letraRepetida = true;
+                        if(contadorRepetitivo == 0){
+                            contadorRepetitivo++;
+                            k++;
+                        }
+                    }
+                }
+                else if(letraRepetida == false){
+                    borrarMensajeLetraRepetida();
                     k++;
+                }
+                else if(contadorRepetitivo > 0 && letraRepetida == true){
+                    k++;
+                }
+                else if(letraRepetida == true && contadorRepetitivo == 0){
+                    letraRepetida = false;
+                    borrarMensajeLetraRepetida();
+                    k++;
+                }     
+            }
+        }
+
+        if(contadorLetrasIncorrectas <= 9){
+            if(contadorRepetitivo == 0){
+                borrarMensajeLetraRepetida();
+                if(caracteresErrados.length == 1){
+                    contadorLetrasIncorrectas++;
                 }
                 else{
-                    k++;
-                }
-            }
-
-            if(contadorRepetitivo > 0 && contadorLetrasIncorrectas == 9){
-                contadorLetrasCorrectas = resultadoCaracteres.length + 1;
-                terminarJuego();
-            }
-
-            if(contadorRepetitivo == 0){
-                if(contadorLetrasIncorrectas <= 9){
-                    caracteresErrados.push(teclaObtenida);
-                    dibujarCaracterIncorrecto(lapizAcuarela, caracteresErrados, caracteresErrados.length);
+                    dibujarHorcaAhorcado(lapizAcuarela, contadorLetrasIncorrectas);
+                    contadorLetrasIncorrectas++;
                 }
                 
-                if(contadorLetrasIncorrectas == 9){
-                    contadorLetrasCorrectas = resultadoCaracteres.length + 1;
-                    terminarJuego();
-                }           
+            }  
+        }
+
+        if(contadorRepetitivo > 0 && contadorLetrasIncorrectas == 9){
+            contadorLetrasCorrectas = resultadoCaracteres.length + 1;
+            nuevaPalabra.classList.remove("text-input3");
+            nuevaPalabra.classList.add("text-input");
+            botonAgregarNuevaPalabra.classList.remove("btn2");
+            botonAgregarNuevaPalabra.classList.add("btn");
+            nuevoTituloArriba.classList.remove("main-rodapie");
+            nuevoTituloArriba.classList.add("main-rodapie2");
+            borrarMensajeLetraRepetida();
+            terminarJuego();
+        }
+
+        if(contadorRepetitivo == 0){
+            if(contadorLetrasIncorrectas <= 9){
+                if(caracteresErrados.length == 1){
+                    dibujarHorcaAhorcado(lapizAcuarela, contadorLetrasIncorrectas);
+                }
+                caracteresErrados.push(teclaObtenida);
+                dibujarCaracterIncorrecto(lapizAcuarela, caracteresErrados, caracteresErrados.length);
+                borrarMensajeLetraRepetida();
+                
             }
-        }       
-    }
-} 
+                
+            if(contadorLetrasIncorrectas == 9){
+                borrarMensajeLetraRepetida();
+                contadorLetrasCorrectas = resultadoCaracteres.length + 1;
+                nuevaPalabra.classList.remove("text-input3");
+                nuevaPalabra.classList.add("text-input");
+                botonAgregarNuevaPalabra.classList.remove("btn2");
+                botonAgregarNuevaPalabra.classList.add("btn");
+                nuevoTituloArriba.classList.remove("main-rodapie");
+                nuevoTituloArriba.classList.add("main-rodapie2");
+                borrarMensajeLetraRepetida();
+                terminarJuego();
+            }           
+        }
+    }       
+}
+
 
 // Función que permite convertir una letra minúscula a mayúscula a partir de la palabra seleccionada al azar
 function convertirMayuscula(palabraObtenida){
@@ -186,6 +257,18 @@ function terminarJuego(){
 // Función que finaliza el juego cuando se acerta correctamente todos los carácteres de la palabra seleccionada al azar
 function verificarGanador(){
     escribirVictoria(lapizAcuarela, "green", "Ganaste,", "Felicidades!");
+}
+
+function mostrarMensajeLetraRepetidaCorrecta(){
+    escribirErrorLetraRepetida(lapizAcuarela, "green", "Ya utilizaste esta letra", "Elige otra diferente");
+}
+
+function mostrarMensajeLetraRepetidaIncorrecta(){
+    escribirErrorLetraRepetida(lapizAcuarela, "red", "Ya utilizaste esta letra", "Elige otra diferente");
+}
+
+function borrarMensajeLetraRepetida(){
+    escribirErrorLetraRepetida(lapizAcuarela, "yellow", "Ya utilizaste esta letra", "Elige otra diferente");
 }
 
 

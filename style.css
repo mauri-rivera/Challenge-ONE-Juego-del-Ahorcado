@@ -17,6 +17,10 @@
   border-radius: 0.5em;
 }
 
+.btn2 {
+  display: none;
+}
+
 .text-input {
   border-radius: 0.5em;
   border: 1px solid rgba(0, 0, 0, 0.2);
@@ -26,6 +30,10 @@
   height: 50px;
   margin-left: auto;
   margin-right: auto;
+}
+
+.text-input3 {
+  display: none;
 }
 
 .main-rodapie {
@@ -51,17 +59,6 @@
   margin: auto;
   justify-content: center;
   display: none;
-}
-
-.text-input3 {
-  border-radius: 0.5em;
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  display: block;
-  padding: 0.5em;
-  width: 1%;
-  height: 50px;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 #nuevo{
