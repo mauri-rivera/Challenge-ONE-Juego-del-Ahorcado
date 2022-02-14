@@ -2,6 +2,7 @@ var botonIniciarJuego = document.querySelector("#iniciar-juego");
 var cuadro = document.querySelector("#ahorcado");
 var nuevoTituloArriba = document.querySelector("#titulo2");
 var nuevoTituloAbajo = document.querySelector("#titulo3");
+var saltoLinea = document.querySelector("#slinea");
 
 var lapizAcuarela = cuadro.getContext('2d');
 var palabraEscogida;    // Variable que representa la palabra secreta seleccionada al azar para ser descifrada
@@ -15,29 +16,19 @@ botonIniciarJuego.addEventListener("click", function(event){
     var detector = new MobileDetect(window.navigator.userAgent);
     
     if(detector.phone() != null || detector.mobile() != null || detector.tablet() != null || detector.os() != null || detector.userAgent() != null){        
-        nuevoTituloArriba.classList.remove("main-rodapie2");
+        mostrarTextoBotonMensajesPantalla();
+        nuevoTituloAbajo.textContent = "Para los dispositivos móviles, tendrá que escribir la letra en el campo de texto debajo del lienzo";
         nuevoTituloAbajo.classList.remove("main-rodapie2");
+        nuevoTituloAbajo.classList.add("main-rodapie");
         inputMovil.classList.remove("text-input2");
         inputMovil.classList.add("text-input");
-        nuevoTituloArriba.textContent = "Sólo se puede agregar una nueva palabra hasta que se termine el juego";
-        nuevoTituloAbajo.textContent = "Para los dispositivos móviles, tendrá que escribir la letra en el campo de texto debajo del lienzo"
-        nuevoTituloArriba.classList.add("main-rodapie");
-        nuevoTituloAbajo.classList.add("main-rodapie");
-        nuevaPalabra.classList.remove("text-input");
-        nuevaPalabra.classList.add("text-input2");
-        botonAgregarNuevaPalabra.classList.remove("btn");
-        botonAgregarNuevaPalabra.classList.add("btn2");
         inputMovil.focus();  
-        setInterval(prepararLetra, 200);                 
+        setInterval(prepararLetra, 200);               
     }
     else{
-        nuevaPalabra.classList.remove("text-input");
-        nuevaPalabra.classList.add("text-input3");
-        botonAgregarNuevaPalabra.classList.remove("btn");
-        botonAgregarNuevaPalabra.classList.add("btn2");
-        nuevoTituloArriba.textContent = "Sólo se puede agregar una nueva palabra hasta que se termine el juego";
-        nuevoTituloArriba.classList.remove("main-rodapie2");
-        nuevoTituloArriba.classList.add("main-rodapie");
+        mostrarTextoBotonMensajesPantalla();
+        document.oncontextmenu = function(){return false;};
+        document.onmousedown = function(){return false;};
     }
 
     if(contadorLetrasCorrectas > 0 && coordenadasLineas.length > 0 && arregloCaracteresRepetitivos.length > 0){
@@ -162,10 +153,20 @@ function ObtenerNuevaLineaEspacio(nuevaLinea, nuevoEspacio, numeroLinea, numeroE
     nuevaLinea = nuevaLinea + (numeroLinea);
     nuevoEspacio = nuevoEspacio + (numeroEspacio);
 
-    return { linea: nuevaLinea, espacio: nuevoEspacio }
+    return { linea: nuevaLinea, espacio: nuevoEspacio };
 }
 
-
+function mostrarTextoBotonMensajesPantalla(){
+    nuevoTituloArriba.textContent = "Sólo se puede agregar una nueva palabra hasta que se termine el juego";
+    nuevoTituloArriba.classList.remove("main-rodapie2");
+    nuevoTituloArriba.classList.add("main-rodapie");
+    nuevaPalabra.classList.remove("text-input");
+    nuevaPalabra.classList.add("text-input3");
+    botonAgregarNuevaPalabra.classList.remove("btn");
+    botonAgregarNuevaPalabra.classList.add("btn2");
+    saltoLinea.classList.remove("saltoLinea2");
+    saltoLinea.classList.add("saltoLinea");
+}
 
 
 

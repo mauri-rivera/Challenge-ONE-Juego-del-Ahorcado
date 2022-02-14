@@ -1,4 +1,3 @@
-
 .titulo {
   padding: 15px;
   width: 30vw;
@@ -63,4 +62,20 @@
 
 #nuevo{
   display: none;
+}
+
+.nuevoTexto{
+  display: block;
+}
+
+.nuevoTexto2{
+  display: none;
+}
+
+.saltoLinea{
+  display:block;
+}
+
+.saltoLinea2{
+  display:none;
 }
