@@ -156,17 +156,7 @@ function ObtenerNuevaLineaEspacio(nuevaLinea, nuevoEspacio, numeroLinea, numeroE
     return { linea: nuevaLinea, espacio: nuevoEspacio };
 }
 
-function mostrarTextoBotonMensajesPantalla(){
-    nuevoTituloArriba.textContent = "Sólo se puede agregar una nueva palabra hasta que se termine el juego";
-    nuevoTituloArriba.classList.remove("main-rodapie2");
-    nuevoTituloArriba.classList.add("main-rodapie");
-    nuevaPalabra.classList.remove("text-input");
-    nuevaPalabra.classList.add("text-input3");
-    botonAgregarNuevaPalabra.classList.remove("btn");
-    botonAgregarNuevaPalabra.classList.add("btn2");
-    saltoLinea.classList.remove("saltoLinea2");
-    saltoLinea.classList.add("saltoLinea");
-}
+
 
 
 

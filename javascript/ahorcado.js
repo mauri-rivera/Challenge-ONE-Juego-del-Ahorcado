@@ -235,61 +235,7 @@ function convertirMayuscula(palabraObtenida){
     return acumuladorCaracteres;
 }
 
-// Función que finaliza el juego cuando se termina de dibujar la Horca (y del Ahorcado)
-function terminarJuego(){
-    escribirDerrota(lapizAcuarela, "red", "Fin del juego!", undefined);
-}
 
-// Función que finaliza el juego cuando se acerta correctamente todos los carácteres de la palabra seleccionada al azar
-function verificarGanador(){
-    escribirVictoria(lapizAcuarela, "green", "Ganaste,", "Felicidades!");
-}
-
-function mostrarMensajeLetraRepetidaCorrecta(teclaObtenida){
-    var primeraParte = "Ya utilizaste la letra";
-    var segundaParte = teclaObtenida;
-    var mensaje1 = primeraParte.concat(" ", segundaParte);
-    escribirErrorLetraRepetida(lapizAcuarela, "green", mensaje1.toString(), "Elige otra diferente");
-}
-
-function mostrarMensajeLetraRepetidaIncorrecta(teclaObtenida){
-    var primeraParte = "Ya utilizaste la letra";
-    var segundaParte = teclaObtenida;
-    var mensaje1 = primeraParte.concat(" ", segundaParte);
-    escribirErrorLetraRepetida(lapizAcuarela, "red", mensaje1.toString(), "Elige otra diferente");
-}
-
-function borrarMensajeLetraRepetida(teclaObtenida){
-    var primeraParte = "Ya utilizaste la letra";
-    var segundaParte, mensaje1;
-    if(pruebaLetraAnterior == false){
-        segundaParte = teclaObtenida;
-        mensaje1 = primeraParte.concat(" ", segundaParte);
-        escribirErrorLetraRepetida(lapizAcuarela, "yellow", mensaje1.toString(), "Elige otra diferente");
-        letraAnterior = teclaObtenida;
-        pruebaLetraAnterior = true;
-    }
-    else{
-        segundaParte = letraAnterior;
-        mensaje1 = primeraParte.concat(" ", segundaParte);
-        escribirErrorLetraRepetida(lapizAcuarela, "yellow", mensaje1.toString(), "Elige otra diferente");
-        letraAnterior = teclaObtenida;
-    }   
-}
-
-function volverMostrarTextoBotonMensajesPantalla(teclaObtenida){
-    nuevaPalabra.classList.remove("text-input3");
-    nuevaPalabra.classList.add("text-input");
-    botonAgregarNuevaPalabra.classList.remove("btn2");
-    botonAgregarNuevaPalabra.classList.add("btn");
-    saltoLinea.classList.remove("saltoLinea2");
-    saltoLinea.classList.add("saltoLinea");
-    nuevoTituloArriba.classList.remove("main-rodapie");
-    nuevoTituloArriba.classList.add("main-rodapie2");
-    document.oncontextmenu = function(){return true;};
-    document.onmousedown = function(){return true;};
-    borrarMensajeLetraRepetida(teclaObtenida);
-}
 
 
 
